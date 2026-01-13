@@ -1,0 +1,52 @@
+# Connection Configuration
+# All sensitive values should reference environment variables (e.g., $DB_PASSWORD)
+# This file defines how to connect to various data stores
+
+snowflake:
+  enabled: true
+  account: ${SNOWFLAKE_ACCOUNT}
+  user: ${SNOWFLAKE_USER}
+  password: ${SNOWFLAKE_PASSWORD}
+  warehouse: ${SNOWFLAKE_WAREHOUSE:-COMPUTE_WH}
+  database: ${SNOWFLAKE_DATABASE:-DEV_DB}
+  schema: ${SNOWFLAKE_SCHEMA:-PUBLIC}
+  role: ${SNOWFLAKE_ROLE:-SYSADMIN}
+  read_only: true
+
+redshift:
+  enabled: false
+  host: ${REDSHIFT_HOST}
+  port: ${REDSHIFT_PORT:-5439}
+  user: ${REDSHIFT_USER}
+  password: ${REDSHIFT_PASSWORD}
+  database: ${REDSHIFT_DATABASE}
+  read_only: true
+
+bigquery:
+  enabled: false
+  project_id: ${GCP_PROJECT_ID}
+  credentials_path: ${GCP_CREDENTIALS_PATH}
+  read_only: true
+
+pinecone:
+  enabled: true
+  api_key: ${PINECONE_API_KEY}
+  environment: ${PINECONE_ENVIRONMENT:-us-west-2-aws}
+  index_name: ${PINECONE_INDEX:-ent-qa}
+  top_k: 5
+  namespace: ${PINECONE_NAMESPACE:-default}
+
+redis:
+  enabled: true
+  host: ${REDIS_HOST:-localhost}
+  port: ${REDIS_PORT:-6379}
+  db: ${REDIS_DB:-0}
+  ttl_seconds: 3600
+
+llm:
+  provider: openai
+  model: gpt-4o
+  api_key: ${OPENAI_API_KEY}
+  temperature: 0.1
+  max_tokens: 2048
+  timeout_seconds: 30
